@@ -45,7 +45,6 @@ func part2(id_ranges []id_range) int {
 	// Same as part 1, identifying repeating patterns, but now the 'invalid' ids are repeated _AT LEAST_ twice (eg: 824824 is invalid, as is 824824824)
 	var total_invalid int
 	for _, id_range := range id_ranges {
-		// fmt.Printf("Searching through: %d-%d\n", id_range.min, id_range.max)
 		// Get the string representation of the number
 		for i := id_range.min; i <= id_range.max; i++ {
 			num_str := strconv.Itoa(i)
@@ -74,7 +73,6 @@ func main() {
 			max, _ := strconv.Atoi(range_values[1])
 			id_ranges = append(id_ranges, id_range{min: min, max: max})
 		}
-
 	}
 
 	fmt.Printf("Part 1: %d\n", part1(id_ranges))

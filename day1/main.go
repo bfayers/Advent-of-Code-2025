@@ -1,11 +1,11 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"regexp"
 	"strconv"
+
+	"github.com/bfayers/Advent-of-Code-2025/utils"
 )
 
 // func part1(data []string)
@@ -66,21 +66,18 @@ func part2(instructions []Instruction) int {
 
 func main() {
 	// Load the data
-	dat, _ := os.Open("input.txt")
-	// Scan over the input to make an array of lines
+	lines := utils.GetFileLines("input.txt")
 	var instructions []Instruction
-	scanner := bufio.NewScanner(dat)
 	// Define regex to get the numbers
 	number_re := regexp.MustCompile("[0-9]+")
 	letter_re := regexp.MustCompile("[a-zA-Z]")
-	for scanner.Scan() {
-		this_line := scanner.Text()
-		number, err := strconv.Atoi(number_re.FindString(this_line))
+	for _, line := range lines {
+		number, err := strconv.Atoi(number_re.FindString(line))
 		if err != nil {
 			fmt.Println("Error converting number:", err)
 			continue
 		}
-		direction := letter_re.FindString(this_line)
+		direction := letter_re.FindString(line)
 		if direction == "L" {
 			instructions = append(instructions, Instruction{Direction: "L", Amount: -number})
 		} else {

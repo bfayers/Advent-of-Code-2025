@@ -1,11 +1,11 @@
 package main
 
 import (
-	"bufio"
 	"fmt"
-	"os"
 	"strconv"
 	"strings"
+
+	"github.com/bfayers/Advent-of-Code-2025/utils"
 )
 
 type id_range struct {
@@ -60,14 +60,10 @@ func part2(id_ranges []id_range) int {
 
 func main() {
 	// Load the data
-	dat, _ := os.Open("input.txt")
-	// Scan over the input to make an array of lines
-	scanner := bufio.NewScanner(dat)
+	lines := utils.GetFileLines("input.txt")
 	var id_ranges []id_range
-	for scanner.Scan() {
-		this_line := scanner.Text()
-		ranges := strings.Split(this_line, ",")
-		for _, range_str := range ranges {
+	for _, line := range lines {
+		for range_str := range strings.SplitSeq(line, ",") {
 			range_values := strings.Split(range_str, "-")
 			min, _ := strconv.Atoi(range_values[0])
 			max, _ := strconv.Atoi(range_values[1])

@@ -21,10 +21,8 @@ func findMaxCombination(bank string, remaining int) int {
 		for j := i + 1; j <= len(bank)-remaining; j++ {
 			if bank[j] > maxDigit {
 				maxDigit = bank[j]
+				i = j
 			}
-		}
-		for bank[i] != maxDigit {
-			i++
 		}
 		result += string(bank[i])
 		remaining--

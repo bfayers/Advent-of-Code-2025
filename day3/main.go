@@ -7,12 +7,11 @@ import (
 	"github.com/bfayers/Advent-of-Code-2025/utils"
 )
 
-func findMaxCombination(bank string, max_length int) int {
-	if len(bank) < max_length {
+func findMaxCombination(bank string, remaining int) int {
+	if len(bank) < remaining {
 		return 0
 	}
 	var result string
-	remaining := max_length
 	for i := 0; i < len(bank) && remaining > 0; i++ {
 		if len(bank)-i == remaining {
 			result += bank[i:]

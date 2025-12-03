@@ -2,34 +2,17 @@ package main
 
 import (
 	"fmt"
-	"slices"
 	"strconv"
 
 	"github.com/bfayers/Advent-of-Code-2025/utils"
 )
 
-func part1(lines []string) int {
-	var total_output_joltage int
-	for _, bank := range lines {
-		// Find all 2 battery pairings, in the right order
-		var pairings []int
-		for i := 0; i <= len(bank)-1; i++ {
-			for j := i + 1; j <= len(bank)-1; j++ {
-				this_pairing, _ := strconv.Atoi(string(bank[i]) + string(bank[j]))
-				pairings = append(pairings, this_pairing)
-			}
-		}
-		total_output_joltage += slices.Max(pairings)
-	}
-	return total_output_joltage
-}
-
-func findMaxCombination(bank string) int {
-	if len(bank) < 12 {
+func findMaxCombination(bank string, max_length int) int {
+	if len(bank) < max_length {
 		return 0
 	}
 	var result string
-	remaining := 12
+	remaining := max_length
 	for i := 0; i < len(bank) && remaining > 0; i++ {
 		if len(bank)-i == remaining {
 			result += bank[i:]
@@ -51,10 +34,18 @@ func findMaxCombination(bank string) int {
 	return val
 }
 
+func part1(lines []string) int {
+	var total_output_joltage int
+	for _, bank := range lines {
+		total_output_joltage += findMaxCombination(bank, 2)
+	}
+	return total_output_joltage
+}
+
 func part2(lines []string) int {
 	var total_output_joltage int
 	for _, bank := range lines {
-		total_output_joltage += findMaxCombination(bank)
+		total_output_joltage += findMaxCombination(bank, 12)
 	}
 	return total_output_joltage
 }

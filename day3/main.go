@@ -34,25 +34,15 @@ func findMaxCombination(bank string, max_length int) int {
 	return val
 }
 
-func part1(lines []string) int {
-	var total_output_joltage int
-	for _, bank := range lines {
-		total_output_joltage += findMaxCombination(bank, 2)
-	}
-	return total_output_joltage
-}
-
-func part2(lines []string) int {
-	var total_output_joltage int
-	for _, bank := range lines {
-		total_output_joltage += findMaxCombination(bank, 12)
-	}
-	return total_output_joltage
-}
-
 func main() {
 	// Load data
 	lines := utils.GetFileLines("input.txt")
-	fmt.Printf("Part 1: %d\n", part1(lines))
-	fmt.Printf("Part 2: %d\n", part2(lines))
+	var part1_total_joltage int
+	var part2_total_joltage int
+	for _, bank := range lines {
+		part1_total_joltage += findMaxCombination(bank, 2)
+		part2_total_joltage += findMaxCombination(bank, 12)
+	}
+	fmt.Printf("Part 1: %d\n", part1_total_joltage)
+	fmt.Printf("Part 2: %d\n", part2_total_joltage)
 }
